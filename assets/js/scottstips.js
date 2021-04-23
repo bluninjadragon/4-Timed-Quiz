@@ -38,6 +38,15 @@ function getQuestion() {
 
 function answerCheck() {
     alert(this.value);
+    if (this.value === questions[questionsIndex].correctAnswer) {
+		alert('correct');
+		questionsIndex++;
+		if (questionsIndex < questions.length) {
+			showQuestion();
+		} else {
+			endGame();
+		}
+	}
     //check the user selection against correct answer
     // incorrect selection remove seconds
     // set store score
