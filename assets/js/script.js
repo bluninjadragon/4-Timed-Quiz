@@ -1,108 +1,74 @@
-//Acceptance Criteria
+//define variables////////////
 
-//GIVEN I am taking a code quiz
-//WHEN I click the start button
-//THEN a timer starts and I am presented with a question
-//WHEN I answer a question
-//THEN I am presented with another question
-//WHEN I answer a question incorrectly
-//THEN time is subtracted from the clock
-//WHEN all questions are answered or the timer reaches 0
-//THEN the game is over
-//WHEN the game is over
-//THEN I can save my initials and my score
+let startBtn = document.querySelector('#start');
+let saveScore = document.querySelector('#save-score');
+let questionTitle = document.querySelector('#question-title');
+let choicesDiv = document.querySelector('#choices');
+let questionIndex = 0;
 
-//----------------
-//VARIABLES
-//----------------
-let generateBtn = document.querySelector("#generate");
-let timerEl = document.getElementById('countdown');
 
-//----------------
-//FUNCTIONS
-//----------------
-
-//click start button, timer begins/init()
-function init() {
-    generateBtn.addEventListener("click", countdown);
-
+//functions////
+//start quiz - init
+function startQuiz() {
+    //start timer
+    //find an area on your HTML (DOM element) and show the first question there
+    getQuestion();
 }
 
-//countdown timer. copied from activity 04-10.
-function countdown() {
-    let timeLeft = 180;
-  
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    let timeInterval = setInterval(function () {
-        //start to see if there is a penalty
-        timerPenalty();
-      // As long as the `timeLeft` is greater than 1
-      if (timeLeft > 1) {
-        // Set the `textContent` of `timerEl` to show the remaining seconds
-        timerEl.textContent = timeLeft + ' seconds remaining';
-        // Decrement `timeLeft` by 1
-        timeLeft--;
-      } else if (timeLeft === 1) {
-        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-        timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-      } else {
-        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-        timerEl.textContent = '0';
-        // Use `clearInterval()` to stop the timer
-        clearInterval(timeInterval);
-        // Call the `displayMessage()` function
-        gameOver();
-      }
-    }, 1000);
+//get the next question
+function getQuestion() {
+    // gets current question
+    let currentQuestion = questions[0];
+    // show the question
+    questionTitle.textContent = currentQuestion.title;
+    // show the choices with buttons. instructor taught us syntax for "forEach"
+    currentQuestion.choices.forEach(choice => {
+        let choiceButton = document.createElement("button");
+        choiceButton.textContent = choice;
+        choiceButton.setAttribute("value",choice);
+        // add event listener for each button created
+        choiceButton.onclick = answerCheck;
+        choicesDiv.appendChild(choiceButton);
+    });
+        
+    answerCheck();
 }
 
-//timer variable decreases by 10 seconds for wrong answer
+//check user selection
 
-function timerPenalty(timeLeft) {
-};
+function answerCheck() {
+    if (this.value === questions[questionIndex].correctAnswer) {
+		questionIndex++;
+		if (questionIndex < questions.length) {
+			getQuestion();
+		} else {
+			endGame();
+		}
+	}
+    alert(questionIndex)
+    //check the user selection against correct answer
+    // incorrect selection remove seconds
+    // set store score
+    //getQuestion();
+    // if questions.length
+    endGame();
+}
 
-//answer correctly, + 1 point.
+//end game
+function endGame() {
+    // set their score
+    // show end screen
+    // clear out timer or set to 0
+}
 
-function correct() {
+function saveHighScore() {
+    // prompt for initials
+    // save score to localstorage
+}
 
-};
-//display 'Game Over' card
-function gameOver() {
+// event listeners////////////
+//start button click
+startBtn.addEventListener('click', startQuiz);
 
-};
-
-function highScore() {
-
-};
-
-function restart() {
-
-};
-
-//-----------------
-//EVENT LISTENERS
-//-----------------
-
-//init - click start button, timer begins
-init();
-
-//click on any button, move to next card/page
-
-
-
-//answer correctly, + 1 point. answer incorrectly, -10 sec timer
-
-correct();
-
-//when timer is up, stop and have a message that says "Game Over"
-
-gameOver();
-
-//enter initals and save high score
-
-highScore();
-
-//game repeats and score is reset
-restart();
-
+//save high score
+saveScore.addEventListener('click', saveHighScore);
