@@ -1,26 +1,26 @@
 let questions = [
 {
     title: "Were Ross and Rachel on a Break?",
-    choices: ["yellow", "hot pink", "brown", "correct"],
-    answer: ["correct"],
+    choices: ["yellow", "hot pink", "brown", "Yes"],
+    answer: ["Yes"],
 },
 
 {
-    title: "what color is the sun?",
-    choices: ["yellow", "hot pink", "brown", "correct"],
-    answer: ["correct"],
+    title: "What is the song of Phoebe's most famous song?",
+    choices: ["yellow", "hot pink", "brown", "Smelly Cat"],
+    answer: ["Smelly Cat"],
 },
 
 {
-    title: "what color is the sun?",
-    choices: ["yellow", "hot pink", "brown", "correct"],
-    answer: ["correct"],
+    title: "How many seasons of Friends are there?",
+    choices: ["yellow", "hot pink", "brown", "10"],
+    answer: ["10"],
 },
 
 {
-    title: "",
-    choices: ["yellow", "hot pink", "brown", "correct"],
-    answer: ["correct"],
+    title: "Who does Monica marry?",
+    choices: ["yellow", "hot pink", "brown", "Chandler"],
+    answer: ["Chandler"],
 },
 
 ];

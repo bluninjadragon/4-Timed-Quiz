@@ -18,7 +18,7 @@ function startQuiz() {
 //get the next question
 function getQuestion() {
     // gets current question
-    let currentQuestion = questions[0];
+    let currentQuestion = questions[questionIndex];
     // show the question
     questionTitle.textContent = currentQuestion.title;
     // show the choices with buttons. instructor taught us syntax for "forEach"
@@ -30,22 +30,22 @@ function getQuestion() {
         choiceButton.onclick = answerCheck;
         choicesDiv.appendChild(choiceButton);
     });
-        
-    answerCheck();
 }
 
 //check user selection
 
 function answerCheck() {
+    alert(questionIndex);
     if (this.value === questions[questionIndex].correctAnswer) {
 		questionIndex++;
 		if (questionIndex < questions.length) {
+            choicesDiv.textContent = ""
 			getQuestion();
 		} else {
 			endGame();
 		}
 	}
-    alert(questionIndex)
+
     //check the user selection against correct answer
     // incorrect selection remove seconds
     // set store score
@@ -71,4 +71,4 @@ function saveHighScore() {
 startBtn.addEventListener('click', startQuiz);
 
 //save high score
-saveScore.addEventListener('click', saveHighScore);
+//saveScore.addEventListener('click', saveHighScore);
