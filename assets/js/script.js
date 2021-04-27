@@ -5,7 +5,7 @@ let saveScore = document.querySelector('#save-score');
 let questionTitle = document.querySelector('#question-title');
 let choicesDiv = document.querySelector('#choices');
 let questionIndex = 0;
-let questionCorrectIndex = 0;
+let questionScore = 0;
 
 
 //functions////
@@ -18,6 +18,7 @@ function startQuiz() {
 
 //get the next question
 function getQuestion() {
+    //moved the index/length logic up to the first getQuestion so that it would not try to pull another question object in the array that isn't defined when question index >= questions.length
     if (questionIndex < questions.length) {
         // gets current question
         let currentQuestion = questions[questionIndex];
@@ -32,6 +33,7 @@ function getQuestion() {
             choiceButton.onclick = answerCheck;
             choicesDiv.appendChild(choiceButton);
         });
+        //when questionIndex = questions.length, go to end game
     } else
         endGame();
 }
@@ -39,29 +41,29 @@ function getQuestion() {
 
 function answerCheck() {
     //finally got this to work ONLY by changing to '==' from '==='. guessing that the '.value' button changed it to a constant from a STRING....]
-		if (this.value == questions[questionIndex].answer) {
-            questionIndex++;
-            questionCorrectIndex++;
-            alert('Correct!');
-            choicesDiv.textContent = "";
-			getQuestion();
-		} else {
-            questionIndex++;
-            alert('Wrong!');
-            choicesDiv.textContent = "";
-            getQuestion();}
-
+		
     //check the user selection against correct answer
+    if (this.value == questions[questionIndex].answer) {
+        questionIndex++;
+        // set store score
+        questionScore++;
+        alert('Correct!');
+        choicesDiv.textContent = "";
+        getQuestion();
+    } else {
+        questionIndex++;
+        alert('Wrong!');
+        choicesDiv.textContent = "";
+        getQuestion();}
+
     // incorrect selection remove seconds
-    // set store score
-    //getQuestion();
-    // if questions.length
+    
 }
 
 //end game
 function endGame() {
-    questionTitle.textContent = "Your High Score Is:";
-    choicesDiv.textContent = questionCorrectIndex;
+    questionTitle.textContent = "Your Score Is:";
+    choicesDiv.textContent = questionScore;
     // set their score
     // show end screen
     // clear out timer or set to 0
