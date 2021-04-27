@@ -5,6 +5,7 @@ let saveScore = document.querySelector('#save-score');
 let questionTitle = document.querySelector('#question-title');
 let choicesDiv = document.querySelector('#choices');
 let questionIndex = 0;
+let questionCorrectIndex = 0;
 
 
 //functions////
@@ -17,45 +18,50 @@ function startQuiz() {
 
 //get the next question
 function getQuestion() {
-    // gets current question
-    let currentQuestion = questions[questionIndex];
-    // show the question
-    questionTitle.textContent = currentQuestion.title;
-    // show the choices with buttons. instructor taught us syntax for "forEach"
-    currentQuestion.choices.forEach(choice => {
-        let choiceButton = document.createElement("button");
-        choiceButton.textContent = choice;
-        choiceButton.setAttribute("value",choice);
-        // add event listener for each button created
-        choiceButton.onclick = answerCheck;
-        choicesDiv.appendChild(choiceButton);
-    });
+    if (questionIndex < questions.length) {
+        // gets current question
+        let currentQuestion = questions[questionIndex];
+        // show the question
+        questionTitle.textContent = currentQuestion.title;
+        // show the choices with buttons. instructor taught us syntax for "forEach"
+        currentQuestion.choices.forEach(choice => {
+            let choiceButton = document.createElement("button");
+            choiceButton.textContent = choice;
+            choiceButton.setAttribute("value",choice);
+            // add event listener for each button created
+            choiceButton.onclick = answerCheck;
+            choicesDiv.appendChild(choiceButton);
+        });
+    } else
+        endGame();
 }
-
 //check user selection
 
 function answerCheck() {
-    alert(questionIndex);
-    if (this.value === questions[questionIndex].correctAnswer) {
-		questionIndex++;
-		if (questionIndex < questions.length) {
-            choicesDiv.textContent = ""
+    //finally got this to work ONLY by changing to '==' from '==='. guessing that the '.value' button changed it to a constant from a STRING....]
+		if (this.value == questions[questionIndex].answer) {
+            questionIndex++;
+            questionCorrectIndex++;
+            alert('Correct!');
+            choicesDiv.textContent = "";
 			getQuestion();
 		} else {
-			endGame();
-		}
-	}
+            questionIndex++;
+            alert('Wrong!');
+            choicesDiv.textContent = "";
+            getQuestion();}
 
     //check the user selection against correct answer
     // incorrect selection remove seconds
     // set store score
     //getQuestion();
     // if questions.length
-    endGame();
 }
 
 //end game
 function endGame() {
+    questionTitle.textContent = "Your High Score Is:";
+    choicesDiv.textContent = questionCorrectIndex;
     // set their score
     // show end screen
     // clear out timer or set to 0
