@@ -4,9 +4,12 @@ let startBtn = document.querySelector('#start');
 let saveScore = document.querySelector('#save-score');
 let questionTitle = document.querySelector('#question-title');
 let choicesDiv = document.querySelector('#choices');
+let initialsLabel = document.querySelector('#initials-label');
+let initialsInput = document.querySelector('#initials-input');
+let timerEl = document.getElementById('countdown');
 let questionIndex = 0;
 let questionScore = 0;
-
+let timeLeft = 180;
 
 //functions////
 //start quiz - init
@@ -14,6 +17,7 @@ function startQuiz() {
     //start timer
     //find an area on your HTML (DOM element) and show the first question there
     getQuestion();
+    countdown();
 }
 
 //get the next question
@@ -52,9 +56,11 @@ function answerCheck() {
         getQuestion();
     } else {
         questionIndex++;
+        timeLeft-10;
         alert('Wrong!');
         choicesDiv.textContent = "";
         getQuestion();}
+        //If wrong, penalize time by 10 secons
 
     // incorrect selection remove seconds
     
@@ -62,27 +68,57 @@ function answerCheck() {
 
 //timer
 function countdown() {
-    
+  
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    let timeInterval = setInterval(function () {
+      // As long as the `timeLeft` is greater than 1
+      if (timeLeft > 1) {
+        // Set the `textContent` of `timerEl` to show the remaining seconds
+        timerEl.textContent = timeLeft + ' seconds remaining';
+        // Decrement `timeLeft` by 1
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+        timerEl.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+      } else {
+        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+        timerEl.textContent = '0';
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+        //hide game clock and jump to endGame screen
+        timerEl.textContent = ""
+        endGame();
+      }
+    }, 1000);
 }
 
 //end game
 function endGame() {
+    // show score
     questionTitle.textContent = "Your Score Is:";
-    choicesDiv.textContent = questionScore;
+    choicesDiv.textContent = questionScore*10;
+    // save score to localstorage
+    localStorage.setItem("highScores", questionScore*10);
+    // prompt for initials within form
+    initialsLabel.textContent = "Enter Initials Here";
+    initialsInput.setAttribute('style', '');
+
+    // create button to prompt save score
     let scoreBtn = document.createElement("button");
     scoreBtn.textContent = "Save High Score";
-    scoreBtn.onclick = saveHighScore;
+    scoreBtn.onclick = highScorePage;
+    //add elements to HTML
     saveScore.appendChild(scoreBtn);
     // set their score
     // show end screen
     // clear out timer or set to 0
 }
 
-function saveHighScore() {
-    alert('high score page')
-    document.location = '/highscores.html/';
+function highScorePage() {
+    document.location = 'file:///C:/Users/jwhsi/Desktop/code/Timed%20Quiz%20-%204/4-Timed-Quiz/highscores.html';
     // prompt for initials
-    // save score to localstorage
+    
 }
 
 // event listeners////////////
