@@ -19,7 +19,7 @@ let questions = [
 
 {
     title: "Were Ross and Rachel on a Break?",
-    choices: ["No", "We Will Never Know ", "Maybe", "Yes"],
+    choices: ["No", "We Will Never Know", "Maybe", "Yes"],
     answer: ["Yes"],
 }
 ];
