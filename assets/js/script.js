@@ -126,4 +126,4 @@ function highScorePage() {
 startBtn.addEventListener('click', startQuiz);
 
 //save high score
-//saveScore.addEventListener('click', saveHighScore);
+//saveScore.addEventListener('click',  saveHighScore);
