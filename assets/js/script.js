@@ -60,16 +60,26 @@ function answerCheck() {
     
 }
 
+//timer
+function countdown() {
+    
+}
+
 //end game
 function endGame() {
     questionTitle.textContent = "Your Score Is:";
     choicesDiv.textContent = questionScore;
+    let scoreBtn = document.createElement("button");
+    scoreBtn.textContent = "Save High Score";
+    scoreBtn.onclick = "./external/highscores.html";
+    saveScore.appendChild(scoreBtn);
     // set their score
     // show end screen
     // clear out timer or set to 0
 }
 
 function saveHighScore() {
+    alert('high score page')
     // prompt for initials
     // save score to localstorage
 }
