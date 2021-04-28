@@ -71,7 +71,7 @@ function endGame() {
     choicesDiv.textContent = questionScore;
     let scoreBtn = document.createElement("button");
     scoreBtn.textContent = "Save High Score";
-    scoreBtn.onclick = "./external/highscores.html";
+    scoreBtn.onclick = saveHighScore;
     saveScore.appendChild(scoreBtn);
     // set their score
     // show end screen
@@ -80,6 +80,7 @@ function endGame() {
 
 function saveHighScore() {
     alert('high score page')
+    document.location = '/highscores.html/';
     // prompt for initials
     // save score to localstorage
 }
