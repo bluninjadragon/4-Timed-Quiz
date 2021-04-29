@@ -9,7 +9,6 @@ let initialsInput = document.querySelector('#initials-input');
 let timerEl = document.getElementById('countdown');
 let questionIndex = 0;
 let questionScore = 0;
-let timeLeft = 180;
 
 //functions////
 //start quiz - init
@@ -45,7 +44,6 @@ function getQuestion() {
 
 function answerCheck() {
     //finally got this to work ONLY by changing to '==' from '==='. guessing that the '.value' button changed it to a constant from a STRING....]
-		
     //check the user selection against correct answer
     if (this.value == questions[questionIndex].answer) {
         questionIndex++;
@@ -56,7 +54,6 @@ function answerCheck() {
         getQuestion();
     } else {
         questionIndex++;
-        timeLeft-10;
         alert('Wrong!');
         choicesDiv.textContent = "";
         getQuestion();}

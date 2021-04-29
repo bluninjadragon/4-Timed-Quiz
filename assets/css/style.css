@@ -1,0 +1,23 @@
+* {
+    text-align: center;
+    font-family: 'Permanent Marker', cursive;
+    font-size: large;
+}
+
+section {
+    flex: 0 auto;
+    padding: 8px;
+    margin-top: 50px;
+    margin-left: 30%;
+    margin-right: 30%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+  }
+
+body {
+    background-image: url(https://cdn.mos.cms.futurecdn.net/b4ERr2LQcbAMctgTpJVA2B-1200-80.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;}

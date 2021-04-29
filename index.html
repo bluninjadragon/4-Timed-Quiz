@@ -5,20 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Timed Quiz</title>
+    <!--using the friends font through google APIs-->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
+    
   </head>
   <body>
     <div>
-      <span id=question-title>
+      <section id=question-title class=card>
         <h1>WELCOME TO THE BEST FRIENDS TV SHOW QUIZ EVER</h1>
         <p>They say even Buzzfeed quizes were jealous after the
           creation of this epic quiz.
         </p>
-        <p>You have a grand total of 3 minutes to complete all the questions. Every correct answer
+        <p>You have a grand total of 120 seconds to complete all the questions. Every correct answer
           acrues one point, but every wrong answer deducts 10 seconds off the timer! Good luck!
         </p>
         <button id=start>Start Quiz</button>
-      </span>
+      </section>
 
       <!-- timer-->
       <div id="countdown"></div>
